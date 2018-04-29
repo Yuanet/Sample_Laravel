@@ -3,7 +3,7 @@
 function get_db_config()
 {
     if (getenv('IS_IN_HEROKU')) {
-        $url = parse_url(getenv("DATABASE_URL"));
+        $url = parse_url(getenv("postgres://wbleacfwcdlnhu:79783685e958d06630189751a5697be0c755990cd186102a795427b995831e8a@ec2-54-221-192-231.compute-1.amazonaws.com:5432/dddhg3v3iehlht"));
 
         return $db_config = [
             'connection' => 'pgsql',
