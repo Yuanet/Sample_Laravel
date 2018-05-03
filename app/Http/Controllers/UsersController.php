@@ -33,6 +33,7 @@ class UsersController extends Controller
     {
         return view('users.show', compact('user'));
     }  
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -40,7 +41,6 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|confirmed|min:6'
         ]);
-
 
         $user = User::create([
             'name' => $request->name,
@@ -51,8 +51,7 @@ class UsersController extends Controller
         $this->sendEmailConfirmationTo($user);
         session()->flash('success', '验证邮件已发送到你的注册邮箱上，请注意查收。');
         return redirect('/');
-
-    } 
+    }
 
     public function edit(User $user)
     {
@@ -93,7 +92,7 @@ class UsersController extends Controller
         $view = 'emails.confirm';
         $data = compact('user');
         $to = $user->email;
-        $subject = "感谢注册 Sample 应用！请确认你的邮箱。";
+        $subject = "感谢注册 Hooters 应用！请确认你的邮箱。";
 
         Mail::send($view, $data, function ($message) use ($to, $subject) {
             $message->to($to)->subject($subject);
